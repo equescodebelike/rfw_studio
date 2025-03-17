@@ -34,7 +34,7 @@ if __name__ == "__main__":
     js_file_path = "../build/web/main.dart.js"
     os.system("flutter clean")
     replace_version_in_constants(constants_file_path, version)
-    os.system("flutter build web --web-renderer canvaskit --release --no-tree-shake-icons")
+    os.system("flutter build web --release --no-tree-shake-icons")
     os.system("cp web/redirect.html build/web/redirect.html")
     replace_start_file_in_index(index_file_path, version)
     rename_js_file(js_file_path, version)

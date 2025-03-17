@@ -35,7 +35,7 @@ class LocalLibrary extends BaseLibrary {
           );
         },
       ),
-      'Image2': (
+      'ImageBlock': (
         schema: Schema(
           type: DataType.object,
           properties: {

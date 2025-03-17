@@ -1,1 +1,1 @@
-String debugVersion = '1.0.1web';
+String debugVersion = '1.0.2web';
