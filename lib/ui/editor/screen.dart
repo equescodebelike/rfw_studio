@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rfw/rfw.dart' show FullyQualifiedWidgetName, RemoteWidget;
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:rfw_studio/src/libraries/local.dart';
 import 'package:signals/signals_flutter.dart';
 import 'package:flutter_fancy_tree_view/flutter_fancy_tree_view.dart';
 
@@ -23,7 +24,7 @@ class _EditorState extends State<Editor> {
   final model = EditorViewModel(
     json: CodeController(),
     code: RfwController(),
-    libraries: [CoreLibrary()],
+    libraries: [CoreLibrary(), LocalLibrary()],
   );
   final boxes = listSignal<(String, Rect)>([]);
   final showOutline = signal(false);
@@ -142,10 +143,7 @@ class _EditorState extends State<Editor> {
                           TextSpan(
                             text: '${entry.node.prefix}:',
                             style: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurface
-                                  .withOpacity(0.6),
+                              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                             ),
                           ),
                           const TextSpan(text: ' '),
@@ -197,8 +195,7 @@ class _EditorState extends State<Editor> {
                                 if (t == null) continue;
                                 final ctx = t.currentContext;
                                 if (ctx == null) continue;
-                                final box =
-                                    ctx.findRenderObject() as RenderBox?;
+                                final box = ctx.findRenderObject() as RenderBox?;
                                 if (box == null) continue;
                                 final position = box.localToGlobal(Offset.zero);
                                 final item = (k, position & box.size);
@@ -254,8 +251,6 @@ class _EditorState extends State<Editor> {
                         Flexible(
                           child: Column(
                             children: [
-                              Flexible(flex: 4, child: jsonEditor),
-                              const Divider(height: 1),
                               Flexible(flex: 6, child: rfwEditor),
                             ],
                           ),
